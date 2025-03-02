@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>test-godot-tma</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <canvas id="canvas"></canvas>
-		
-		<!-- Telegram Web App script -->
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
-		<script>
-			const tg = window.Telegram.WebApp;
-			tg.expand(); // Expands the mini app to full height
-			const user = tg.initDataUnsafe.user; // Gets Telegram user data
-			console.log(user); // Logs user info to the browser console
-		</script>
 
-		<!-- Godot engine and game -->
-		<script src="index.js"></script>
-        <script>
-            var engine = new Engine({"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":81312,"index.wasm":43016933},"focusCanvas":true,"gdextensionLibs":[]});
-            engine.startGame();
-        </script>
-    </body>
+<head>
+    <title>Cardgame</title>
+    <meta charset="UTF-8">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="index.js"></script>
+    <script>
+        Telegram.WebApp.ready();
+
+        Telegram.WebApp.onEvent('mainButtonClicked', function () {
+            Telegram.WebApp.close();
+        });
+
+        var user = Telegram.WebApp.initDataUnsafe.user;
+        console.log('User ID:', user.id);
+
+
+        var engine = new Engine({"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1621360,"index.wasm":43016933},"focusCanvas":true,"gdextensionLibs":[]});
+        engine.startGame();
+    </script>
+</body>
+
 </html>
